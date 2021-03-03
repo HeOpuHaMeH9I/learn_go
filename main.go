@@ -1,13 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"learn_go/pkg/logging"
-	"learn_go/hello"
-	"learn_go/pkg/pkglo"
+	log "github.com/sirupsen/logrus"
+	"learn_go/pkg/rest"
 )
 
 func main() {
-	fmt.Printf(hello.Hello())
-	fmt.Printf(pkglo.Introduce())
+	log.SetFormatter(&log.JSONFormatter{})
+	log.WithFields(log.Fields{
+		"host": "localhost",
+	}).Info("starting application")
+	rest.StartServer()
 }
